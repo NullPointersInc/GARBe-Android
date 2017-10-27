@@ -33,7 +33,8 @@ public class MainActivity extends AppCompatActivity {
         CircularProgressBar circularProgressBar,circularProgressBar2,circularProgressBar3,circularProgressBar4,circularProgressBar5,circularProgressBar6;
         TextView t1,t2,t3,t4,t5,t6;
         int temp[] = new int[6];
-        String s = "http://api.thingspeak.com/channels/265517/feed/last.json";
+        String s1 = "http://api.thingspeak.com/channels/352450/feed/last.json";
+        String s2= "http://api.thingspeak.com/channels/352451/feed/last.json";
 
         @Override
         protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -156,7 +157,7 @@ public class MainActivity extends AppCompatActivity {
         public void fetchGarbageDetails() {
             final String TAG = MainActivity.class.getSimpleName();
 
-            JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET, s, null, new Response.Listener<JSONObject>() {
+            JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET, s1, null, new Response.Listener<JSONObject>() {
 
                 @Override
                 public void onResponse(JSONObject response) {
@@ -166,17 +167,20 @@ public class MainActivity extends AppCompatActivity {
                         // Parsing json object response
                         // response will be a json object
                         temp[0] = response.getInt("field1");
-                        temp[1] = response.getInt("field2");
+                        /*temp[1] = response.getInt("field2");
                         temp[2] = response.getInt("field3");
                         temp[3] = response.getInt("field4");
                         temp[4] = response.getInt("field5");
                         temp[5] = response.getInt("field6");
+                        */System.out.println("SEE THIS:"+ temp[0]);
+                        Log.e("Error", "Error");
 
                     } catch (JSONException e) {
                         e.printStackTrace();
                         Toast.makeText(getApplicationContext(),
                                 "Error: " + e.getMessage(),
                                 Toast.LENGTH_LONG).show();
+                        Log.e("Error", "Error");
                     }
                 }
             }, new Response.ErrorListener() {
@@ -186,12 +190,59 @@ public class MainActivity extends AppCompatActivity {
                     VolleyLog.d(TAG, "Error: " + error.getMessage());
                     Toast.makeText(getApplicationContext(),
                             error.getMessage(), Toast.LENGTH_SHORT).show();
+                    Log.e("Error", "Error");
                     // hide the progress dialog
                 }
             });
             // Adding request to request queue
             try {
                 AppCont.getInstance().addToRequestQueue(jsonObjReq);
+            }
+            catch (NullPointerException e)
+            {
+                Log.e("Error:", e.toString());
+            }
+
+            JsonObjectRequest jsonObjReq1 = new JsonObjectRequest(Request.Method.GET, s2, null, new Response.Listener<JSONObject>() {
+
+                @Override
+                public void onResponse(JSONObject response) {
+                    Log.d(TAG, response.toString());
+
+                    try {
+                        // Parsing json object response
+                        // response will be a json object
+                        //temp[0] = response.getInt("field1");
+                        temp[1] = response.getInt("field2");
+                        temp[2] = response.getInt("field3");
+                        temp[3] = response.getInt("field4");
+                        temp[4] = response.getInt("field5");
+                        temp[5] = response.getInt("field6");
+                        System.out.println("SEE THIS:"+ temp[0]);
+                        Log.e("Error", "Error");
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        Toast.makeText(getApplicationContext(),
+                                "Error: " + e.getMessage(),
+                                Toast.LENGTH_LONG).show();
+                        Log.e("Error", "Error");
+                    }
+                }
+            }, new Response.ErrorListener() {
+
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    VolleyLog.d(TAG, "Error: " + error.getMessage());
+                    Toast.makeText(getApplicationContext(),
+                            error.getMessage(), Toast.LENGTH_SHORT).show();
+                    Log.e("Error", "Error");
+                    // hide the progress dialog
+                }
+            });
+            // Adding request to request queue
+            try {
+                AppCont.getInstance().addToRequestQueue(jsonObjReq1);
             }
             catch (NullPointerException e)
             {
