@@ -171,16 +171,14 @@ public class MainActivity extends AppCompatActivity {
                         temp[2] = response.getInt("field3");
                         temp[3] = response.getInt("field4");
                         temp[4] = response.getInt("field5");
-                        temp[5] = response.getInt("field6");
-                        */System.out.println("SEE THIS:"+ temp[0]);
-                        Log.e("Error", "Error");
+                        temp[5] = response.getInt("field6");*/
 
                     } catch (JSONException e) {
                         e.printStackTrace();
                         Toast.makeText(getApplicationContext(),
                                 "Error: " + e.getMessage(),
                                 Toast.LENGTH_LONG).show();
-                        Log.e("Error", "Error");
+
                     }
                 }
             }, new Response.ErrorListener() {
@@ -190,7 +188,7 @@ public class MainActivity extends AppCompatActivity {
                     VolleyLog.d(TAG, "Error: " + error.getMessage());
                     Toast.makeText(getApplicationContext(),
                             error.getMessage(), Toast.LENGTH_SHORT).show();
-                    Log.e("Error", "Error");
+
                     // hide the progress dialog
                 }
             });
@@ -218,15 +216,14 @@ public class MainActivity extends AppCompatActivity {
                         temp[3] = response.getInt("field4");
                         temp[4] = response.getInt("field5");
                         temp[5] = response.getInt("field6");
-                        System.out.println("SEE THIS:"+ temp[0]);
-                        Log.e("Error", "Error");
+
 
                     } catch (JSONException e) {
                         e.printStackTrace();
                         Toast.makeText(getApplicationContext(),
                                 "Error: " + e.getMessage(),
                                 Toast.LENGTH_LONG).show();
-                        Log.e("Error", "Error");
+
                     }
                 }
             }, new Response.ErrorListener() {
@@ -236,7 +233,7 @@ public class MainActivity extends AppCompatActivity {
                     VolleyLog.d(TAG, "Error: " + error.getMessage());
                     Toast.makeText(getApplicationContext(),
                             error.getMessage(), Toast.LENGTH_SHORT).show();
-                    Log.e("Error", "Error");
+
                     // hide the progress dialog
                 }
             });
